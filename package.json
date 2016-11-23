@@ -1,0 +1,30 @@
+{
+  "name": "donation-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "boom": "^4.2.0",
+    "handlebars": "^4.0.5",
+    "hapi": "^15.2.0",
+    "hapi-auth-cookie": "^6.1.1",
+    "inert": "^4.0.2",
+    "joi": "^9.2.0",
+    "lodash": "^4.17.2",
+    "mongoose": "^4.6.7",
+    "mongoose-seeder": "^1.2.1",
+    "require": "^2.4.20",
+    "vision": "^4.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "sync-request": "^3.0.1"
+  }
+}
