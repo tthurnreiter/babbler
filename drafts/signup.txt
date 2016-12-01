@@ -1,0 +1,33 @@
+<div class="ui grid container">
+    <div class="ui column">
+  <div class="ui segment">
+    <form class="ui form">
+      <div class="field">
+        <input type="text" name="name" placeholder="Full Name">
+      </div>
+      <div class="field">
+        <input type="text" name="email" placeholder="Email">
+      </div>
+      <div class="field">
+        <input type="password" name="password" placeholder="Password">
+      </div>
+      <button class="ui fluid primary button" type="submit">Sign up</button>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ui inverted segment">
+  <div class="ui inverted form">
+    <div class="field">
+      <input placeholder="Full Name" type="text">
+    </div>
+    <div class="field">
+      <input placeholder="E-mail" type="text">
+    </div>
+    <div class="field">
+      <input placeholder="Password" type="password">
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui blue fluid submit button">Sign up</div>
+  </div>
+</div>
