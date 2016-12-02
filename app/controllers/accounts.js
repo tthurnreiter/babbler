@@ -7,7 +7,7 @@ const User = require('../models/user');
 exports.main = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('main', {title: 'Welcome to Donations'});
+    reply.view('main', {title: 'Babbler. Don\'t hold back.'});
   },
 };
 
