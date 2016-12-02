@@ -14,7 +14,7 @@ exports.main = {
 exports.signup = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('signup', {title: 'Sign up for Donations'});
+    reply.view('signup', {title: 'Sign up for Babbler'});
   },
 };
 
@@ -23,13 +23,13 @@ exports.register = {
 
   validate: {
     payload: {
-      firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
+      Name: Joi.string().required(),
+      Email: Joi.string().email().required(),
+      Password: Joi.string().required(),
     },
 
     failAction: function (request, reply, source, error) {
+
       reply.view('signup', {
         title: 'Sign up error',
         errors: error.data.details,
@@ -55,7 +55,7 @@ exports.register = {
 exports.login = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('login', { title: 'Login to Donations' });
+    reply.view('login', { title: 'Log in to Babbler' });
   },
 };
 
