@@ -5,9 +5,14 @@ const Joi = require('joi');
 const User = require('../models/user');
 
 exports.main = {
-  auth: false,
+  auth: { mode: 'optional' },
   handler: function (request, reply) {
-    reply.view('main', {title: 'Babbler. Don\'t hold back.'});
+    if(request.auth.isAuthenticated) {
+      reply.view('usermain', {title: 'Babbler. Don\'t hold back.'});
+    }
+    else {
+      reply.view('main', {title: 'Babbler. Don\'t hold back.'});
+    }
   },
 };
 
@@ -69,9 +74,9 @@ exports.authenticate = {
           loggedIn: true,
           loggedInUser: user.email,
         });
-        reply.redirect('/home');
+        reply.redirect('/');
       } else {
-        reply.redirect('/signup');
+        reply.view('login', { title: 'Log in to Babbler', errors: [{ message: "Incorrect username or password." }] } );
       }
     }).catch(err => {
       reply.redirect('/');

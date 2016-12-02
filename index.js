@@ -18,7 +18,6 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
     cookie: 'donation-cookie',
     ttl: 24 * 60 * 60 * 1000,
     isSecure: false,
-    redirectTo: '/login',
   });
 
   server.auth.default({ strategy: 'standard' });

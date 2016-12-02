@@ -6,6 +6,7 @@
     <div class="ui centered six wide column">
       <h1 class="ui white header">Log in to Babbler.</h1>
       <form class="ui form login" action="/login" method="POST">
+        {{>formerror}}
         <div class="field">
           <input type="text" name="email" placeholder="Email">
         </div>
