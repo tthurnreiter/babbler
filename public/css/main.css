@@ -1,0 +1,5 @@
+.displace20 {
+    position: relative;
+    top: 20%;
+    transform: translateY(-20%);
+}
