@@ -1,10 +1,11 @@
 {{> mainmenu }}
 <div id="bg-container"></div>
+<script src="/js/validate.js"></script>
 <div class="displace20">
   <div class="ui stackable grid">
     <div class="ui centered six wide column">
       <h1 class="ui white header">Log in to Babbler.</h1>
-      <form class="ui form">
+      <form class="ui form login" target="/login" method="POST">
         <div class="field">
           <input type="text" name="email" placeholder="Email">
         </div>
@@ -12,6 +13,7 @@
           <input type="password" name="password" placeholder="Password">
         </div>
         <button class="ui fluid teal button" type="submit">Log in</button>
+        <div class="ui error message"></div>
       </form>
     </div>
   </div>
