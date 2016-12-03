@@ -16,6 +16,7 @@ mongoose.connection.on('connected', function () {
     var seeder = require('mongoose-seeder');
     const data = require('./data.json');
     const User = require('./user');
+    const Babble = require('./babble');
 
     seeder.seed(data, { dropDatabase: false, dropCollections: true }).then(dbData => {
       console.log('seeding data');
