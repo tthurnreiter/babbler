@@ -35,6 +35,7 @@ body{
 #mainmenu{
     background-color: white;
     margin-top: 0px;
+    margin-bottom: 30px;
     position: relative;
     top: 15px;
     border-radius: 2px;

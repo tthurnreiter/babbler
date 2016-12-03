@@ -1,20 +1,35 @@
 {{> usermenu _id="settings"}}
-
-<section class="ui raised segment">
-  <div class="ui grid">
-    <div class="ui ten wide column">
-      <div class="ui stacked fluid form segment">
+<div class="displace20">
+  <div class="ui stackable grid container">
+    <div class="ui five wide column">
+      <div class="ui card">
+        <div class="image">
+          <img src="http://semantic-ui.com/images/avatar2/large/kristy.png">
+        </div>
+        <div class="content">
+          <a class="header">Kristy</a>
+          <div class="meta">
+            <span class="date">Joined in 2013</span>
+          </div>
+          <div class="description">
+            Kristy is an art director living in New York.
+          </div>
+        </div>
+        <div class="extra content">
+          <a>
+            <i class="user icon"></i>
+            22 Friends
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ui six wide column">
+      <div class="ui fluid form segment">
         <form action="/settings" method="POST">
-          <h3 class="ui header">Register</h3>
-          <div class="two fields">
-            <div class="field">
-              <label>First Name</label>
-              <input value="{{user.firstName}}" type="text" name="firstName">
-            </div>
-            <div class="field">
-              <label>Last Name</label>
-              <input value="{{user.lastName}}" type="text" name="lastName">
-            </div>
+          <h3 class="ui header">User details</h3>
+          <div class="field">
+            <label>Name</label>
+            <input value="{{user.name}}" type="text" name="name">
           </div>
           <div class="field">
             <label>Email</label>
@@ -28,8 +43,5 @@
         </form>
       </div>
     </div>
-    <aside class="ui five wide column">
-      <img src="images/>homer3.png" class="ui medium image">
-    </aside>
   </div>
-</section>
+</div>
