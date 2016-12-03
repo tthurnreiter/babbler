@@ -5,9 +5,9 @@ const Joi = require('joi');
 const User = require('../models/user');
 
 exports.main = {
-  auth: { mode: 'optional' },
+  auth: {mode: 'optional'},
   handler: function (request, reply) {
-    if(request.auth.isAuthenticated) {
+    if (request.auth.isAuthenticated) {
       reply.view('usermain', {title: 'Babbler. Don\'t hold back.'});
     }
     else {
@@ -60,7 +60,7 @@ exports.register = {
 exports.login = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('login', { title: 'Log in to Babbler' });
+    reply.view('login', {title: 'Log in to Babbler'});
   },
 };
 
@@ -68,7 +68,7 @@ exports.authenticate = {
   auth: false,
   handler: function (request, reply) {
     const user = request.payload;
-    User.findOne({ email: user.email }).then(foundUser => {
+    User.findOne({email: user.email}).then(foundUser => {
       if (foundUser && foundUser.password === user.password) {
         request.cookieAuth.set({
           loggedIn: true,
@@ -76,7 +76,10 @@ exports.authenticate = {
         });
         reply.redirect('/');
       } else {
-        reply.view('login', { title: 'Log in to Babbler', errors: [{ message: "Incorrect username or password." }] } );
+        reply.view('login', {
+          title: 'Log in to Babbler',
+          errors: [{message: "Incorrect username or password."}]
+        });
       }
     }).catch(err => {
       reply.redirect('/');
@@ -88,34 +91,5 @@ exports.logout = {
   handler: function (request, reply) {
     request.cookieAuth.clear();
     reply.redirect('/');
-  },
-};
-
-exports.viewSettings = {
-  handler: function (request, reply) {
-    var userEmail = request.auth.credentials.loggedInUser;
-    User.findOne({ email: userEmail }).then(foundUser => {
-      reply.view('settings', { title: 'Edit account settings', user: foundUser, });
-    }).catch( err => {
-      reply.redirect('/');
-    });
-  },
-};
-
-exports.updateSettings = {
-  handler: function (request, reply) {
-    var editedUser = request.payload;
-    var loggedInUserEmail = request.auth.credentials.loggedInUser;
-
-    User.findOne({ email: loggedInUserEmail }).then(user => {
-      user.firstName = editedUser.firstName;
-      user.lastName = editedUser.lastName;
-      user.email = editedUser.email;
-      return user.save();
-    }).then(user => {
-      reply.view('settings', { title: 'Edit Account Settings', user: user });
-    }).catch( err => {
-      reply.redirect('/');
-    })
   },
 };

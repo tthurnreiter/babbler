@@ -1,5 +1,6 @@
 const Assets = require('./app/controllers/assets');
 const Accounts = require('./app/controllers/accounts');
+const Settings = require('./app/controllers/settings');
 
 module.exports = [
   { method: 'GET', path: '/', config: Accounts.main },
@@ -12,8 +13,8 @@ module.exports = [
   { method: 'GET', path: '/logout', config: Accounts.logout },
 
 
-  { method: 'GET', path: '/settings', config: Accounts.viewSettings },
-  { method: 'POST', path: '/settings', config: Accounts.updateSettings },
+  { method: 'GET', path: '/settings', config: Settings.viewSettings },
+  { method: 'POST', path: '/settings', config: Settings.updateSettings },
 
   {
     method: 'GET', path: '/{param*}',
