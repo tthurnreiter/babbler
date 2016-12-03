@@ -24,7 +24,7 @@ exports.postBabble = {
         reply.redirect('/');
       });
     }).catch(err => {
-      reply.(err);
+      reply(err);
     })
   },
 };
