@@ -4,17 +4,6 @@ const Joi = require('joi');
 
 const User = require('../models/user');
 
-exports.main = {
-  auth: { mode: 'optional' },
-  handler: function (request, reply) {
-    if (request.auth.isAuthenticated) {
-      reply.view('usermain', { title: 'Babbler. Don\'t hold back.' });
-    } else {
-      reply.view('main', { title: 'Babbler. Don\'t hold back.' });
-    }
-  },
-};
-
 exports.signup = {
   auth: false,
   handler: function (request, reply) {
