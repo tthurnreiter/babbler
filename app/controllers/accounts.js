@@ -16,9 +16,9 @@ exports.register = {
 
   validate: {
     payload: {
-      Name: Joi.string().required(),
-      Email: Joi.string().email().required(),
-      Password: Joi.string().required(),
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
     },
 
     failAction: function (request, reply, source, error) {
