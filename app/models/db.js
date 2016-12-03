@@ -17,7 +17,7 @@ mongoose.connection.on('connected', function () {
     const data = require('./data.json');
     const User = require('./user');
 
-    seeder.seed(data, {dropDatabase: false, dropCollections: true}).then(dbData => {
+    seeder.seed(data, { dropDatabase: false, dropCollections: true }).then(dbData => {
       console.log('seeding data');
       console.log(dbData);
     }).catch(err => {
