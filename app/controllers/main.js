@@ -1,6 +1,7 @@
 'use strict';
 
 const Babble = require('../models/babble');
+const User = require('../models/user');
 
 const moment = require('moment');
 
@@ -10,7 +11,7 @@ exports.main = {
     if (request.auth.isAuthenticated) {
       Babble.find({}).populate('user').then(babbles => {
         //sort babbles newest first
-        babbles.sort(function(a,b){
+        babbles.sort(function (a, b) {
           return b.date - a.date;
         });
 
@@ -19,9 +20,12 @@ exports.main = {
           let date = moment(babble.date);
           babble.datestring = date.format("D. MMMM Y, H:mm:ss");
         })
-        reply.view('usermain', {
-          title: 'Babbler. Don\'t hold back.',
-          babbles: babbles,
+        User.findOne({ email: request.auth.credentials.loggedInUser }).then(user => {
+          reply.view('usermain', {
+            title: 'Babbler. Don\'t hold back.',
+            user: user,
+            babbles: babbles,
+          });
         });
       }).catch(err => {
         reply(err);
