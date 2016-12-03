@@ -24,14 +24,19 @@
             </div>
         </div>
         <div class="ten wide column">
-            <form class="ui form" action="/babble" method="POST">
-                <div class="ui fluid action input">
-                    <input type="text" name="content" placeholder="What are you thinking about?">
-                    <div class="ui icon button" data-tooltip="Add a picture to your babble" data-inverted=""><i
-                            class="camera icon"></i></div>
-                    <button class="ui teal submit button">Babble</button>
-                </div>
-            </form>
+            <div class="ui row">
+                <form class="ui form" id="babbleform" action="/babble" method="POST">
+                    <div class="ui fluid action input">
+                        <input type="text" name="content" placeholder="What are you thinking about?">
+                        <div class="ui icon button" data-tooltip="Add a picture to your babble" data-inverted=""><i
+                                class="camera icon"></i></div>
+                        <button class="ui teal submit button">Babble</button>
+                    </div>
+                </form>
+            </div>
+            <div class="ui row">
+                {{> babbles}}
+            </div>
         </div>
     </div>
 </div>
