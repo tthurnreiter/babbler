@@ -4,17 +4,20 @@
     "homer": {
       "name": "Homer Simpson",
       "email": "homer@simpson.com",
-      "password": "secret"
+      "password": "secret",
+      "bio": "Homer is an interior designer living in New York."
     },
     "marge": {
       "name": "Marge Simpson",
       "email": "marge@simpson.com",
-      "password": "secret"
+      "password": "secret",
+      "bio": "Marge is a personal assistant living in Paris"
     },
     "bart": {
       "name": "Bart Simpson",
       "email": "bart@simpson.com",
-      "password": "secret"
+      "password": "secret",
+      "bio": "Bart an art director living in New York."
     }
   }
 }
