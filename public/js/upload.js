@@ -24,4 +24,8 @@ $(document).ready(function () {
         control.replaceWith(control.val('').clone(true));
         $('#babbleform #preview').removeAttr('src');
       });
+
+  $('#babbleform').on('submit', function () {
+    $('#babbleform').addClass('loading disabled');
+  });
 });
