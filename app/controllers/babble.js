@@ -6,6 +6,10 @@ const Babble = require('../models/babble');
 const User = require('../models/user');
 
 exports.postBabble = {
+  payload: {
+    maxBytes: 5000000,
+  },
+
   validate: {
     payload: {
       text: Joi.string().max(140).required(),
