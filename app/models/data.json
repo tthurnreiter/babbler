@@ -24,43 +24,43 @@
     "_model": "Babble",
     "one": {
       "user": "->users.bart",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
     },
     "two": {
       "user": "->users.marge",
-      "content": "testetetet adsijadsfj asd"
+      "text": "testetetet adsijadsfj asd"
     },
     "three": {
       "user": "->users.bart",
-      "content": "rqrewqurewqu3 43u0943 u03 "
+      "text": "rqrewqurewqu3 43u0943 u03 "
     },
     "four": {
       "user": "->users.homer",
-      "content": "#lol"
+      "text": "#lol"
     },
     "five": {
       "user": "->users.marge",
-      "content": "we344328 423143281  21304324 "
+      "text": "we344328 423143281  21304324 "
     },
     "six": {
       "user": "->users.marge",
-      "content": "ycxvxy  yxv v,c  nxy cv"
+      "text": "ycxvxy  yxv v,c  nxy cv"
     },
     "seven": {
       "user": "->users.homer",
-      "content": "qpwweepw pwpw wpw pwp "
+      "text": "qpwweepw pwpw wpw pwp "
     },
     "eight": {
       "user": "->users.bart",
-      "content": "$%/&  $% /& $% /&$% /%& /"
+      "text": "$%/&  $% /& $% /&$% /%& /"
     },
     "nine": {
       "user": "->users.homer",
-      "content": "BORK BORK BORK"
+      "text": "BORK BORK BORK"
     },
     "ten": {
       "user": "->users.bart",
-      "content": "DFF EFK KFEK E E EE E EE E E "
+      "text": "DFF EFK KFEK E E EE E EE E E "
     }
   }
 }

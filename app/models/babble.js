@@ -7,7 +7,7 @@ const babbleSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  content: String,
+  text: String,
   image: {
     data: Buffer,
     contentType: String,

@@ -57,3 +57,11 @@ body{
 #babbleform{
     margin-bottom: 14px;
 }
+
+#babbleform #preview {
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+}

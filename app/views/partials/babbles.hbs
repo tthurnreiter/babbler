@@ -1,18 +1,24 @@
 {{#if babbles}}
-        {{#each babbles}}
-            <div class="ui fluid card">
-                <div class="content">
-                    <div class="description" style="font-size: 1.25rem;">
-                        <p>{{content}}</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    Posted {{datestring}}
-                    <div class="right floated author">
-                        {{user.name}} <img class="ui avatar image"
-                                           src="//semantic-ui.com/images/avatar/small/matt.jpg">
-                    </div>
+    {{#each babbles}}
+        <div class="ui fluid card">
+            <div class="content">
+                <div class="description" style="font-size: 1.25rem;">
+                    {{#if image.data}}
+                        <div class="ui rounded image">
+                            <img src="data:{{image.contentType}};base64,{{image.base64}}">
+                        </div>
+                        <div class="ui divider"></div>
+                    {{/if}}
+                    <p>{{text}}</p>
                 </div>
             </div>
-        {{/each}}
+            <div class="extra content">
+                Posted {{datestring}}
+                <div class="right floated author">
+                    {{user.name}} <img class="ui avatar image"
+                                       src="//semantic-ui.com/images/avatar/small/matt.jpg">
+                </div>
+            </div>
+        </div>
+    {{/each}}
 {{/if}}

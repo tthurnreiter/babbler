@@ -8,11 +8,12 @@ const User = require('../models/user');
 exports.postBabble = {
   validate: {
     payload: {
-      content: Joi.string().max(140).required(),
+      text: Joi.string().max(140).required(),
+      image: Joi.any(),
     },
 
     failAction: function (request, reply, source, error) {
-      reply.redirect('/fail');
+      reply.redirect('/joifail');
     },
   },
   handler: function (request, reply) {
@@ -20,6 +21,10 @@ exports.postBabble = {
     User.findOne({ email: userEmail }).then(user => {
       const babble = new Babble(request.payload);
       babble.user = user._id;
+      if(request.payload.image.length){
+        babble.image.data = request.payload.image;
+        babble.image.contentType = 'image/png';
+      }
       babble.save().then(newBabble => {
         reply.redirect('/');
       });

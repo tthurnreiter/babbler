@@ -19,8 +19,7 @@ mongoose.connection.on('connected', function () {
     const Babble = require('./babble');
 
     seeder.seed(data, { dropDatabase: false, dropCollections: true }).then(dbData => {
-      console.log('seeding data');
-      console.log(dbData);
+      console.log('Seed data');
     }).catch(err => {
       console.log(err);
     });
