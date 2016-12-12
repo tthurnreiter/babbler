@@ -62,16 +62,15 @@ exports.showUserTimeline = {
             const base = babble.image.data.toString('base64');
             babble.image.base64 = base;
           }
-
-          reply.view('usertimeline', {
-            title: 'Babbler. Don\'t hold back.',
-            user: foundUser,
-            babbles: babbles,
-          });
-        })
+        });
+        reply.view('usertimeline', {
+          title: 'Babbler. Don\'t hold back.',
+          user: foundUser,
+          babbles: babbles,
+        });
       })
     }).catch(err => {
-      reply(err);
+      reply("User ID " + err.value + " not found");
     });
   },
 };
