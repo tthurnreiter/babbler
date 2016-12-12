@@ -9,7 +9,7 @@ const babbleSchema = mongoose.Schema({
   },
   text: String,
   image: {
-    data: Buffer,
+    data: String,
     contentType: String,
   },
   date: {

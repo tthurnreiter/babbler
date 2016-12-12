@@ -26,8 +26,8 @@ exports.postBabble = {
       const babble = new Babble(request.payload);
       babble.user = user._id;
       if(request.payload.image.length){
-        babble.image.data = request.payload.image;
-        babble.image.contentType = 'image/png';
+        babble.image.data = request.payload.image.toString('base64')
+        babble.image.contentType = 'image/*';
       }
       babble.save().then(newBabble => {
         reply.redirect('/');

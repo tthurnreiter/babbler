@@ -19,11 +19,6 @@ exports.main = {
           //produce date string for easier display
           let date = moment(babble.date);
           babble.datestring = date.format("D. MMMM Y, H:mm:ss");
-          //convert image to base64
-          if (babble.image && babble.image.data) {
-            const base = babble.image.data.toString('base64');
-            babble.image.base64 = base;
-          }
         })
         User.findOne({ email: request.auth.credentials.loggedInUser }).then(user => {
           reply.view('usermain', {
@@ -57,11 +52,6 @@ exports.showUserTimeline = {
           //produce date string for easier display
           let date = moment(babble.date);
           babble.datestring = date.format("D. MMMM Y, H:mm:ss");
-          //convert image to base64
-          if (babble.image && babble.image.data) {
-            const base = babble.image.data.toString('base64');
-            babble.image.base64 = base;
-          }
         });
         reply.view('usertimeline', {
           title: 'Babbler. Don\'t hold back.',
