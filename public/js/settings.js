@@ -5,6 +5,7 @@ $(document).ready(function () {
         $('#imageinput').click();
       });
   $('#imageinput').on('change', function () {
+    $('#uploadbutton').addClass('disabled loading');
     $('#imageform').submit();
   });
 });

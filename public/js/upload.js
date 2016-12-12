@@ -45,6 +45,7 @@ $(document).ready(function () {
       $('#babbleform #submitbutton').attr('data-tooltip', 'Your babble can not be longer than 140 characters');
     }
     else {
+      $('#babbleform').addClass('disabled loading');
       return true;
     }
     return false;
