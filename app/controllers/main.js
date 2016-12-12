@@ -17,13 +17,12 @@ exports.main = {
 
         babbles.forEach(babble => {
           //produce date string for easier display
-          let date = moment(babble.date);
-          babble.datestring = date.format("D. MMMM Y, H:mm:ss");
+          babble.datestring = moment(babble.date).format("D. MMMM Y, H:mm:ss");
         })
-        User.findOne({ email: request.auth.credentials.loggedInUser }).then(user => {
+        User.findOne({ email: request.auth.credentials.loggedInUser }).then(loggedInUser => {
           reply.view('usermain', {
             title: 'Babbler. Don\'t hold back.',
-            user: user,
+            loggedInUser: loggedInUser,
             babbles: babbles,
           });
         });
