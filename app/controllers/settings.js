@@ -14,6 +14,10 @@ exports.viewSettings = {
 };
 
 exports.updateSettings = {
+  payload: {
+    maxBytes: 5000000,
+  },
+
   handler: function (request, reply) {
     var editedUser = request.payload;
     var loggedInUserEmail = request.auth.credentials.loggedInUser;
@@ -36,6 +40,11 @@ exports.updateSettings = {
 
       if (editedUser.password) {
         user.password = editedUser.password;
+      }
+
+      if(editedUser.image) {
+        user.image.contentType = 'image/*';
+        user.image.data = editedUser.image.toString('base64');
       }
 
       return user.save();
