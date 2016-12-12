@@ -9,28 +9,21 @@ exports.main = {
   auth: { mode: 'try' },
   handler: function (request, reply) {
     if (request.auth.isAuthenticated) {
-      Babble.find({}).populate('user').then(babbles => {
+      Promise.all([
+        Babble.find({}).populate('user'),
+        User.findOne({ email: request.auth.credentials.loggedInUser }),
+      ]).then(([babbles, loggedInUser]) => {
         //sort babbles newest first
         babbles.sort(function (a, b) {
           return b.date - a.date;
         });
-
         babbles.forEach(babble => {
           //produce date string for easier display
           babble.datestring = moment(babble.date).format("D. MMMM Y, H:mm:ss");
-        })
-        User.findOne({ email: request.auth.credentials.loggedInUser }).then(loggedInUser => {
-          reply.view('usermain', {
-            title: 'Babbler. Don\'t hold back.',
-            loggedInUser: loggedInUser,
-            babbles: babbles,
-          });
         });
       }).catch(err => {
         reply(err);
       });
-
-
     } else {
       reply.view('main', { title: 'Babbler. Don\'t hold back.' });
     }
