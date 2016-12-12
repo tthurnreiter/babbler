@@ -19,7 +19,12 @@ exports.main = {
         });
         babbles.forEach(babble => {
           //produce date string for easier display
-          babble.datestring = moment(babble.date).format("D. MMMM Y, H:mm:ss");
+          babble.datestring = moment(babble.date).format('D. MMMM Y, H:mm:s');
+        });
+        reply.view('usermain', {
+          title: 'Babbler. Don\'t hold back.',
+          loggedInUser: loggedInUser,
+          babbles: babbles,
         });
       }).catch(err => {
         reply(err);
