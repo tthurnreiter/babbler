@@ -13,14 +13,7 @@ exports.main = {
         Babble.find({}).populate('user'),
         User.findOne({ email: request.auth.credentials.loggedInUser }),
       ]).then(([babbles, loggedInUser]) => {
-        //sort babbles newest first
-        babbles.sort(function (a, b) {
-          return b.date - a.date;
-        });
-        babbles.forEach(babble => {
-          //produce date string for easier display
-          babble.datestring = moment(babble.date).format('D. MMMM Y, H:mm:s');
-        });
+        formatBabbles(babbles,loggedInUser);
         reply.view('usermain', {
           title: 'Babbler. Don\'t hold back.',
           loggedInUser: loggedInUser,
@@ -38,26 +31,38 @@ exports.main = {
 exports.showUserTimeline = {
   plugins: { 'hapi-auth-cookie': { redirectTo: '/login' } },
   handler: function (request, reply) {
-    User.findOne({ _id: request.params.id }).then(foundUser => {
-      Babble.find({ user: foundUser }).populate('user').then(babbles => {
-        //sort babbles newest first
-        babbles.sort(function (a, b) {
-          return b.date - a.date;
-        });
 
-        babbles.forEach(babble => {
-          //produce date string for easier display
-          let date = moment(babble.date);
-          babble.datestring = date.format("D. MMMM Y, H:mm:ss");
-        });
+    Promise.all([
+      User.findOne({ _id: request.params.id }),
+      User.findOne({ email: request.auth.credentials.loggedInUser }),
+    ]).then(([user, loggedInUser]) => {
+      Babble.find({ user: user }).populate('user').then(babbles => {
+        formatBabbles(babbles, loggedInUser);
         reply.view('usertimeline', {
           title: 'Babbler. Don\'t hold back.',
-          user: foundUser,
+          user: user,
           babbles: babbles,
         });
       })
     }).catch(err => {
-      reply("User ID " + err.value + " not found");
+      reply('User ID ' + err.value + ' not found');
     });
   },
 };
+
+function formatBabbles(babbles, loggedInUser) {
+  //sort babbles newest first
+  babbles.sort(function (a, b) {
+    return b.date - a.date;
+  });
+
+  babbles.forEach(babble => {
+    //produce date string for easier display
+    let date = moment(babble.date);
+    babble.datestring = date.format('D. MMMM Y, H:mm:ss');
+    //set canDelete property for delete button display
+    if (babble.user._id.equals(loggedInUser._id)) {
+      babble.canDelete = true;
+    }
+  });
+}
