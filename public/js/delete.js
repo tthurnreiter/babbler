@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
   var idToDelete;
-  var type;
+  var itemType;
 
   $('.label.delete')
       .on('click', function (e) {
@@ -10,9 +10,9 @@ $(document).ready(function () {
         idToDelete = parent.id;
 
         if ($(parent).hasClass('babble')) {
-          type = 'babble';
+          itemType = 'babble';
         } else if ($(parent).hasClass('user')) {
-          type = 'user';
+          itemType = 'user';
         }
 
         $('.basic.modal').modal('show');
@@ -21,7 +21,7 @@ $(document).ready(function () {
   $('.basic.modal .ok.button')
       .on('click', function (e) {
         $.ajax({
-          url: '/api/' + type + '/' + idToDelete,
+          url: '/api/' + itemType + '/' + idToDelete,
           type: 'DELETE',
           success: function (result) {
             location.reload();
