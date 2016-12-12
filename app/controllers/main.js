@@ -13,7 +13,7 @@ exports.main = {
         Babble.find({}).populate('user'),
         User.findOne({ email: request.auth.credentials.loggedInUser }),
       ]).then(([babbles, loggedInUser]) => {
-        formatBabbles(babbles,loggedInUser);
+        formatBabbles(babbles, loggedInUser);
         reply.view('usermain', {
           title: 'Babbler. Don\'t hold back.',
           loggedInUser: loggedInUser,
@@ -50,6 +50,27 @@ exports.showUserTimeline = {
   },
 };
 
+exports.showUsers = {
+  plugins: { 'hapi-auth-cookie': { redirectTo: '/login' } },
+  handler: function (request, reply) {
+    User.find({}).then(users => {
+      users.forEach(user => {
+        user.canDelete = true;
+      })
+      reply.view('users', {
+        users: users,
+      });
+    });
+  },
+};
+
+exports.myBabbles = {
+  handler: function (request, reply) {
+
+
+  }
+}
+
 function formatBabbles(babbles, loggedInUser) {
   //sort babbles newest first
   babbles.sort(function (a, b) {
@@ -61,7 +82,8 @@ function formatBabbles(babbles, loggedInUser) {
     let date = moment(babble.date);
     babble.datestring = date.format('D. MMMM Y, H:mm:ss');
     //set canDelete property for delete button display
-    if (babble.user._id.equals(loggedInUser._id)) {
+    if (babble.user._id.equals(loggedInUser._id)
+        || (loggedInUser.role && loggedInUser.role === 'admin')) {
       babble.canDelete = true;
     }
   });

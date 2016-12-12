@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
   image: {
     contentType: String,
     data: String,
-  }
+  },
+  role: String,
 });
 
 const User = mongoose.model('User', userSchema);

@@ -26,6 +26,13 @@
       "email": "bart@simpson.com",
       "password": "secret",
       "bio": "Bart an art director living in New York."
+    },
+    "admin": {
+      "name": "Admin",
+      "email": "admin@babbler.com",
+      "password": "admin",
+      "bio": "This is the administrator account",
+      "role": "admin"
     }
   },
   "babbles": {

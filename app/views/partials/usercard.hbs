@@ -1,12 +1,13 @@
-<div class="ui card" id="{{_id}}">
-    <div class="image">
+<div class="ui card user" id="{{_id}}">
+    <a class="image" href="/user/{{_id}}">
         {{#if image.data}}
             <img src="data:{{image.contentType}};base64,{{image.data}}">
         {{else}}
             <img src="http://semantic-ui.com/images/wireframe/image.png">
         {{/if}}
-    </div>
+    </a>
     <div class="content">
+        {{> canDelete}}
         <a class="header" href="/user/{{_id}}">{{name}}</a>
         <div class="meta">
             <span class="date">Joined in 2013</span>
@@ -16,7 +17,7 @@
         </div>
     </div>
     <div class="extra content">
-            <i class="comments icon"></i>
-            22 Babbles
+        <i class="comments icon"></i>
+        22 Babbles
     </div>
 </div>

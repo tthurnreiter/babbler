@@ -20,7 +20,11 @@ module.exports = [
 
   { method: 'POST', path: '/babble', config: Babble.postBabble },
 
+  { method: 'GET', path: '/users', config: Main.showUsers},
+
   { method: 'GET', path: '/user/{id}', config: Main.showUserTimeline},
+
+  { method: 'GET', path: '/mybabbles', config: Main.myBabbles},
 
   {
     method: 'GET', path: '/{param*}',
