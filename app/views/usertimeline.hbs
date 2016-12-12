@@ -1,0 +1,15 @@
+{{> usermenu }}
+<div class="ui container">
+    <div class="ui stackable grid">
+        <div class="three wide column">
+            {{#with user}}
+                {{> usercard}}
+            {{/with}}
+        </div>
+        <div class="ten wide column">
+            <div class="ui row">
+                {{> babbles}}
+            </div>
+        </div>
+    </div>
+</div>

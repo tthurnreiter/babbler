@@ -42,3 +42,36 @@ exports.main = {
     }
   },
 };
+
+exports.showUserTimeline = {
+  auth: false,
+  handler: function (request, reply) {
+    User.findOne({ _id: request.params.id }).then(foundUser => {
+      Babble.find({ user: foundUser }).populate('user').then(babbles => {
+        //sort babbles newest first
+        babbles.sort(function (a, b) {
+          return b.date - a.date;
+        });
+
+        babbles.forEach(babble => {
+          //produce date string for easier display
+          let date = moment(babble.date);
+          babble.datestring = date.format("D. MMMM Y, H:mm:ss");
+          //convert image to base64
+          if (babble.image && babble.image.data) {
+            const base = babble.image.data.toString('base64');
+            babble.image.base64 = base;
+          }
+
+          reply.view('usertimeline', {
+            title: 'Babbler. Don\'t hold back.',
+            user: foundUser,
+            babbles: babbles,
+          });
+        })
+      })
+    }).catch(err => {
+      reply(err);
+    });
+  },
+};
