@@ -6,7 +6,7 @@ const User = require('../models/user');
 const moment = require('moment');
 
 exports.main = {
-  auth: { mode: 'optional' },
+  auth: { mode: 'try' },
   handler: function (request, reply) {
     if (request.auth.isAuthenticated) {
       Babble.find({}).populate('user').then(babbles => {
@@ -44,7 +44,7 @@ exports.main = {
 };
 
 exports.showUserTimeline = {
-  auth: false,
+  plugins: { 'hapi-auth-cookie': { redirectTo: '/login' } },
   handler: function (request, reply) {
     User.findOne({ _id: request.params.id }).then(foundUser => {
       Babble.find({ user: foundUser }).populate('user').then(babbles => {

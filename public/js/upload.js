@@ -18,6 +18,12 @@ $(document).ready(function () {
     }
   });
 
+  $('#babbleform #textinput').on('input', function () {
+    $('#babbleform #submitbutton').addClass('teal');
+    $('#babbleform #submitbutton').removeClass('red');
+    $('#babbleform #submitbutton').removeAttr('data-tooltip');
+  });
+
   $('#babbleform #preview')
       .on('click', function (e) {
         var control = $("#babbleform #fileinput");
@@ -26,6 +32,22 @@ $(document).ready(function () {
       });
 
   $('#babbleform').on('submit', function () {
-    $('#babbleform').addClass('loading disabled');
+    if($('#babbleform #textinput').val().length < 1 )
+    {
+      $('#babbleform #submitbutton').removeClass('teal');
+      $('#babbleform #submitbutton').addClass('red');
+      $('#babbleform #submitbutton').attr('data-tooltip', 'Please enter some text first');
+    }
+    else if($('#babbleform #textinput').val().length > 140 )
+    {
+      $('#babbleform #submitbutton').removeClass('teal');
+      $('#babbleform #submitbutton').addClass('red');
+      $('#babbleform #submitbutton').attr('data-tooltip', 'Your babble can not be longer than 140 characters');
+    }
+    else {
+      return true;
+    }
+    return false;
   });
+
 });
