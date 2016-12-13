@@ -22,3 +22,4 @@ POST /api/babbles: post new babble
 DELETE /api/babbles: delete all babbles
 
 GET /api/user/{id}/babbles: get all babbles by user
+DELETE /api/user/{id}/babbles: delete all babbles by user

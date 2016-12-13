@@ -88,10 +88,22 @@ exports.deleteAll = {
 exports.getByUser = {
   auth: false,
   handler: function (request, reply) {
-    Babble.find({ user: request.params.id}).then(babbles => {
+    Babble.find({ user: request.params.id }).then(babbles => {
       reply(babbles).code(200);
     }).catch(err => {
       reply(Boom.notFound('no babbles found for this id'));
+    });
+  },
+};
+
+
+exports.deleteByUser = {
+  auth: false,
+  handler: function (request, reply) {
+    Babble.remove({ user: request.params.id }).then(() => {
+      reply().code(204);
+    }).catch(err => {
+      reply(Boom.notFound('none found'));
     });
   },
 };
