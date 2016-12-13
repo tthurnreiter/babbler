@@ -67,7 +67,6 @@ exports.showUsers = {
 exports.myBabbles = {
   handler: function (request, reply) {
 
-
   }
 }
 

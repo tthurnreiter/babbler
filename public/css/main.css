@@ -17,6 +17,10 @@ body{
     color: white;
 }
 
+.ui.card {
+    margin-top: 0 !important;
+}
+
 #bg-container{
     position:absolute;
     top:0;
@@ -65,3 +69,4 @@ body{
     width: auto;
     height: auto;
 }
+
