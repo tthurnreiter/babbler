@@ -1,6 +1,7 @@
 'use strict';
 
 const User = require('../models/user');
+const Joi = require('joi');
 
 exports.viewSettings = {
   handler: function (request, reply) {
@@ -16,6 +17,24 @@ exports.viewSettings = {
 exports.updateSettings = {
   payload: {
     maxBytes: 5000000,
+  },
+
+  validate: {
+    payload: {
+      name: Joi.string(),
+      email: Joi.string().email(),
+      password: Joi.string(),
+      bio: Joi.string(),
+      image: Joi.string(),
+    },
+
+    failAction: function (request, reply, source, error) {
+      reply(error.data.details).code(400);
+    },
+
+    options: {
+      abortEarly: false,
+    },
   },
 
   handler: function (request, reply) {

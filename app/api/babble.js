@@ -1,7 +1,45 @@
 'use strict';
 
 const Babble = require('../models/babble');
+const User = require('../models/user');
+
 const Boom = require('boom');
+const Joi = require('joi');
+
+exports.post = {
+  auth: false,
+
+  payload: {
+    maxBytes: 5000000,
+  },
+
+  validate: {
+    payload: {
+      user: Joi.string().required(),
+      text: Joi.string().max(140).required(),
+      image: Joi.any(),
+    },
+
+    failAction: function (request, reply, source, error) {
+      reply.badRequest(error.data.details);
+    },
+  },
+  handler: function (request, reply) {
+    User.findOne({ _id: request.payload.user }).then(user => {
+      const babble = new Babble(request.payload);
+      babble.user = user._id;
+      if(request.payload.image && request.payload.image.length){
+        babble.image.data = request.payload.image.toString('base64')
+        babble.image.contentType = 'image/*';
+      }
+      babble.save().then(newBabble => {
+        reply(newBabble).code(200);
+      });
+    }).catch(err => {
+      reply(Boom.badImplementation(err));
+    })
+  },
+};
 
 exports.getOne = {
   auth: false,
