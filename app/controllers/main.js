@@ -38,12 +38,19 @@ exports.showUserTimeline = {
     ]).then(([user, loggedInUser]) => {
       Babble.find({ user: user }).populate('user').then(babbles => {
         formatBabbles(babbles, loggedInUser);
+        var allowBulkDelete;
+        if((user.role && user.role === 'admin') || ( user._id.equals(loggedInUser._id)))
+        {
+          allowBulkDelete = true;
+        }
+
         reply.view('usertimeline', {
           title: 'Babbler. Don\'t hold back.',
           user: user,
           babbles: babbles,
+          allowBulkDelete: true,
         });
-      })
+      });
     }).catch(err => {
       reply('User ID ' + err.value + ' not found');
     });
@@ -56,7 +63,7 @@ exports.showUsers = {
     User.find({}).then(users => {
       users.forEach(user => {
         user.canDelete = true;
-      })
+      });
       reply.view('users', {
         users: users,
       });

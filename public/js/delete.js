@@ -1,8 +1,8 @@
-
 $(document).ready(function () {
 
   var idToDelete;
   var itemType;
+  var itemTypeMulti;
 
   $('.label.delete')
       .on('click', function (e) {
