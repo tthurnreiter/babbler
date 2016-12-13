@@ -14,7 +14,7 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
   }
 
   server.auth.strategy('standard', 'cookie', {
-    password: 'secretpasswordnotrevealedtoanyone', //factor this out to gitignored config for real app
+    password: 'secretpasswordnotrevealedtoanyone',
     cookie: 'babbler-cookie',
     ttl: 24 * 60 * 60 * 1000,
     isSecure: false,
