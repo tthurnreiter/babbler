@@ -24,8 +24,6 @@ module.exports = [
 
   { method: 'GET', path: '/user/{id}', config: Main.showUserTimeline},
 
-  { method: 'GET', path: '/mybabbles', config: Main.myBabbles},
-
   { method: 'GET', path: '/global', config: Main.showGlobalTimeline},
 
   {

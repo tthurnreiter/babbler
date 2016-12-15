@@ -100,16 +100,6 @@ exports.showUsers = {
   },
 };
 
-exports.myBabbles = {
-  handler: function (request, reply) {
-    User.findOne({ email: request.auth.credentials.loggedInUser }).then(user => {
-      reply.redirect('/user/' + user._id);
-    }).catch(err => {
-      reply.redirect('/login');
-    });
-  },
-};
-
 exports.showGlobalTimeline = {
   handler: function (request, reply) {
     User.findOne({ email: request.auth.credentials.loggedInUser }).then(loggedInUser => {
