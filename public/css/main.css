@@ -21,6 +21,10 @@ body{
     margin-top: 0 !important;
 }
 
+.label.delete .icon{
+    margin: 0 !important;
+}
+
 #bg-container{
     position:absolute;
     top:0;
