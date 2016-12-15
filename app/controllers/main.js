@@ -10,7 +10,7 @@ exports.main = {
   handler: function (request, reply) {
     if (request.auth.isAuthenticated) {
       User.findOne({ email: request.auth.credentials.loggedInUser }).then(loggedInUser => {
-        Babble.find({ user: {$in: [...loggedInUser.following, loggedInUser._id] } }).populate('user').then(babbles => {
+        Babble.find({ user: { $in: [...loggedInUser.following, loggedInUser._id] } }).populate('user').then(babbles => {
           formatBabbles(babbles, loggedInUser);
           reply.view('usermain', {
             title: 'Babbler. Don\'t hold back.',
@@ -108,6 +108,23 @@ exports.myBabbles = {
       reply.redirect('/login');
     });
   },
+};
+
+exports.showGlobalTimeline = {
+  handler: function (request, reply) {
+    User.findOne({ email: request.auth.credentials.loggedInUser }).then(loggedInUser => {
+      Babble.find({}).populate('user').then(babbles => {
+        formatBabbles(babbles, loggedInUser);
+        reply.view('usermain', {
+          title: 'Babbler. Don\'t hold back.',
+          loggedInUser: loggedInUser,
+          babbles: babbles,
+        });
+      });
+    }).catch(err => {
+      reply(err);
+    });
+  }
 };
 
 function formatBabbles(babbles, loggedInUser) {

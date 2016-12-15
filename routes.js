@@ -26,6 +26,8 @@ module.exports = [
 
   { method: 'GET', path: '/mybabbles', config: Main.myBabbles},
 
+  { method: 'GET', path: '/global', config: Main.showGlobalTimeline},
+
   {
     method: 'GET', path: '/{param*}',
     config: { auth: false },
