@@ -9,23 +9,23 @@ exports.main = {
   auth: { mode: 'try' },
   handler: function (request, reply) {
     if (request.auth.isAuthenticated) {
-      Promise.all([
-        Babble.find({}).populate('user'),
-        User.findOne({ email: request.auth.credentials.loggedInUser }),
-      ]).then(([babbles, loggedInUser]) => {
-        formatBabbles(babbles, loggedInUser);
-        reply.view('usermain', {
-          title: 'Babbler. Don\'t hold back.',
-          loggedInUser: loggedInUser,
-          babbles: babbles,
+      User.findOne({ email: request.auth.credentials.loggedInUser }).then(loggedInUser => {
+        Babble.find({ user: {$in: [...loggedInUser.following, loggedInUser._id] } }).populate('user').then(babbles => {
+          formatBabbles(babbles, loggedInUser);
+          reply.view('usermain', {
+            title: 'Babbler. Don\'t hold back.',
+            loggedInUser: loggedInUser,
+            babbles: babbles,
+          });
         });
       }).catch(err => {
         reply(err);
       });
-    } else {
+    }
+    else {
       reply.view('main', { title: 'Babbler. Don\'t hold back.' });
     }
-  },
+  }
 };
 
 exports.showUserTimeline = {
@@ -87,7 +87,9 @@ exports.showUsers = {
           users.sort((a, b) => {
             return a.showFollow - b.showFollow;
           });
-          _.remove(users, (user) => { return user._id.equals(loggedInUser._id);});
+          _.remove(users, (user) => {
+            return user._id.equals(loggedInUser._id);
+          });
           reply.view('users', {
             users: users,
             loggedInUser: loggedInUser,
@@ -123,5 +125,6 @@ function formatBabbles(babbles, loggedInUser) {
         || (loggedInUser.role && loggedInUser.role === 'admin')) {
       babble.canDelete = true;
     }
+
   });
 }
