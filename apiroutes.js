@@ -20,7 +20,8 @@ module.exports = [
   { method: 'POST', path: '/api/babbles', config: Babble.post },
   { method: 'DELETE', path: '/api/babbles', config: Babble.deleteAll },
 
+  { method: 'POST', path: '/api/babbles/bulkdelete', config: Babble.bulkDelete },
+
   { method: 'GET', path: '/api/user/{id}/babbles', config: Babble.getByUser },
   { method: 'DELETE', path: '/api/user/{id}/babbles', config: Babble.deleteByUser },
-
 ];

@@ -28,7 +28,7 @@ exports.post = {
     User.findOne({ _id: request.payload.user }).then(user => {
       const babble = new Babble(request.payload);
       babble.user = user._id;
-      if(request.payload.image && request.payload.image.length){
+      if (request.payload.image && request.payload.image.length) {
         babble.image.data = request.payload.image.toString('base64')
         babble.image.contentType = 'image/*';
       }
@@ -104,6 +104,27 @@ exports.deleteByUser = {
       reply().code(204);
     }).catch(err => {
       reply(Boom.notFound('none found'));
+    });
+  },
+};
+
+exports.bulkDelete = {
+  auth: false,
+  handler: function (request, reply) {
+    var babbleIDs = [];
+    try {
+      babbleIDs = JSON.parse(request.payload);
+    }
+    catch (e) {
+      reply(Boom.badData('json not valid'));
+      return;
+    }
+
+    var succeeded = [];
+    var failed = [];
+
+    Babble.remove({ _id: {$in: babbleIDs }}).then((err, obj) => {
+      reply( { "numDeleted" : err.result.n } );
     });
   },
 };
