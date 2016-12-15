@@ -25,7 +25,8 @@
       "name": "Bart Simpson",
       "email": "bart@simpson.com",
       "password": "secret",
-      "bio": "Bart an art director living in New York."
+      "bio": "Bart an art director living in New York.",
+      "following": ["->users.homer", "->users.marge"]
     },
     "admin": {
       "name": "Admin",

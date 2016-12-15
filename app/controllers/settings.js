@@ -25,7 +25,7 @@ exports.updateSettings = {
       email: Joi.string().email(),
       password: Joi.string(),
       bio: Joi.string(),
-      image: Joi.string(),
+      image: Joi.optional(),
     },
 
     failAction: function (request, reply, source, error) {

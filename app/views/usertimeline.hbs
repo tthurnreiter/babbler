@@ -1,14 +1,13 @@
 {{> usermenu }}
+<script src="/js/follow.js"></script>
+<div class="identity" id="{{loggedInUser._id}}" style="display:none;"></div>
 <div class="ui container">
     <div class="ui stackable grid">
         <div class="three wide column">
             {{#with user}}
                 {{> usercard}}
             {{/with}}
-            {{#if allowBulkDelete}}
-                {{> deletemodal multiple=true item="babbles"}}
-                <div class="ui red fluid basic button deleteall" userid="{{user._id}}">Delete all Babbles</div>
-            {{/if}}
+
         </div>
         <div class="ten wide column">
             {{> babbles}}

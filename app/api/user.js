@@ -3,6 +3,7 @@
 const User = require('../models/user');
 const Boom = require('boom');
 const Joi = require('joi');
+const _ = require('lodash');
 
 exports.create = {
   auth: false,
@@ -155,6 +156,10 @@ exports.addFollowing = {
       User.findOne({ _id: request.params.id1 }),
       User.findOne({ _id: request.params.id2 }),
     ]).then(([user1, user2]) => {
+      if(_.some(user1.following, user2._id)){
+        reply(user1.following).code(200);
+        return;
+      }
       user1.following.push(user2._id);
       user1.save().then(() => {
         reply(user1.following).code(200);

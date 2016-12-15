@@ -19,5 +19,16 @@
     <div class="extra content">
         <i class="comments icon"></i>
         22 Babbles
+        {{#if showFollow }}
+            <a class="ui top left attached teal label follow">
+                <i class="plus icon"></i> follow
+            </a>
+        {{/if}}
+        {{#if showUnfollow }}
+            <a class="ui top left attached grey label unfollow">
+                <i class="minus icon"></i> unfollow
+            </a>
+        {{/if}}
     </div>
+
 </div>
