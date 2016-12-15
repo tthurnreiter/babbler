@@ -74,7 +74,7 @@ exports.edit = {
         user.password = editedUser.password;
       }
 
-      if(editedUser.image) {
+      if (editedUser.image) {
         user.image.contentType = 'image/*';
         user.image.data = editedUser.image.toString('base64');
       }
@@ -102,7 +102,7 @@ exports.getOne = {
 exports.getAll = {
   auth: false,
   handler: function (request, reply) {
-    User.find({}).then( users => {
+    User.find({}).then(users => {
       reply(users).code(200);
     }).catch(err => {
       reply(Boom.badImplementation('error'));
@@ -124,7 +124,7 @@ exports.deleteOne = {
 exports.deleteAll = {
   auth: false,
   handler: function (request, reply) {
-    User.remove({}).then( () => {
+    User.remove({}).then(() => {
       reply().code(204);
     }).catch(err => {
       reply(Boom.badImplementation('error while deleting'));
@@ -135,9 +135,9 @@ exports.deleteAll = {
 exports.getFollowing = {
   auth: false,
   handler: function (request, reply) {
-    User.findOne( _id: request.params.id }).then( (user) => {
+    User.findOne({ _id: request.params.id }).then((user) => {
       reply(user.following).code(200);
-    }).catch( (err) => {
+    }).catch((err) => {
       reply(Boom.badImplementation(err));
     });
   },
@@ -146,8 +146,21 @@ exports.getFollowing = {
 exports.addFollowing = {
   auth: false,
   handler: function (request, reply) {
-    User.findOne( { _id: request.params.id }).then( (user) => {
-      //TODO
+    if(request.params.id1 === request.params.id2)
+    {
+      reply(Boom.badRequest('users not follow theirselves'));
+      return;
+    }
+    Promise.all([
+      User.findOne({ _id: request.params.id1 }),
+      User.findOne({ _id: request.params.id2 }),
+    ]).then(([user1, user2]) => {
+      user1.following.push(user2._id);
+      user1.save().then(() => {
+        reply(user1.following).code(200);
+      });
+    }).catch((err) => {
+      reply(Boom.badRequest(err));
     });
   },
 };
@@ -155,6 +168,16 @@ exports.addFollowing = {
 exports.deleteFollowing = {
   auth: false,
   handler: function (request, reply) {
-    //TODO
+    Promise.all([
+      User.findOne({ _id: request.params.id1 }),
+      User.findOne({ _id: request.params.id2 }),
+    ]).then(([user1, user2]) => {
+      user1.following.pull(user2._id);
+      user1.save().then(() => {
+        reply(user1.following).code(200);
+      });
+    }).catch((err) => {
+      reply(Boom.badRequest(err));
+    });
   },
 };
