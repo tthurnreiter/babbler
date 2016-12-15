@@ -131,3 +131,30 @@ exports.deleteAll = {
     });
   },
 };
+
+exports.getFollowing = {
+  auth: false,
+  handler: function (request, reply) {
+    User.findOne( _id: request.params.id }).then( (user) => {
+      reply(user.following).code(200);
+    }).catch( (err) => {
+      reply(Boom.badImplementation(err));
+    });
+  },
+};
+
+exports.addFollowing = {
+  auth: false,
+  handler: function (request, reply) {
+    User.findOne( { _id: request.params.id }).then( (user) => {
+      //TODO
+    });
+  },
+};
+
+exports.deleteFollowing = {
+  auth: false,
+  handler: function (request, reply) {
+    //TODO
+  },
+};
