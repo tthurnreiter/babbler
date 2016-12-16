@@ -1,3 +1,9 @@
 {{#if canDelete}}
-    <a class="ui top right attached red label delete"><i class="remove icon"></i></a>
+    <a class="ui top right attached red label delete {{itemType}}"><i class="remove icon"></i></a>
+    <div class="ui top right attached label bulkdelete {{itemType}} " style="display:none">
+        <div class="ui toggle checkbox bulkdelete {{itemType}}">
+            <input class="deleteCheckbox" type="checkbox">
+            <label>Delete</label>
+        </div>
+    </div>
 {{/if}}

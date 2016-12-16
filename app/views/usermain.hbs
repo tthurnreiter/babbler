@@ -1,5 +1,6 @@
 {{> usermenu }}
-<script src="js/upload.js"></script>
+<script src="/js/upload.js"></script>
+<script src="/js/bulkdelete.js"></script>
 <div class="ui container">
     <div class="ui stackable grid">
         <div class="three wide column">
@@ -12,6 +13,9 @@
                 {{> babbleform}}
             </div>
             {{> babbles}}
+        </div>
+        <div class="three wide column">
+        {{>bulkdeletebutton}}
         </div>
     </div>
 </div>

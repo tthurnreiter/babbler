@@ -111,20 +111,21 @@ exports.deleteByUser = {
 exports.bulkDelete = {
   auth: false,
   handler: function (request, reply) {
-    var babbleIDs = [];
-    try {
-      babbleIDs = JSON.parse(request.payload);
-    }
-    catch (e) {
-      reply(Boom.badData('json not valid'));
+    var babbleIDs = request.payload;
+
+    if(!babbleIDs || !babbleIDs[0]) {
+      reply(Boom.badData('data not valid'));
       return;
     }
+
 
     var succeeded = [];
     var failed = [];
 
     Babble.remove({ _id: {$in: babbleIDs }}).then((err, obj) => {
       reply( { "numDeleted" : err.result.n } );
+    }).catch( err => {
+      reply(Boom.badData('error'));
     });
   },
 };

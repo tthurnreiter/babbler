@@ -17,6 +17,9 @@ module.exports = [
   { method: 'POST', path: '/api/users', config: User.create },
   { method: 'DELETE', path: '/api/users', config: User.deleteAll },
 
+  { method: 'POST', path: '/api/users/bulkdelete', config: User.bulkDelete },
+
+
 
 
     //BABBLES

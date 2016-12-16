@@ -25,3 +25,6 @@ POST /api/bubbles/bulkdelete: accepts json array of babble ids to delete. Exampl
 
 GET /api/user/{id}/babbles: get all babbles by user
 DELETE /api/user/{id}/babbles: delete all babbles by user
+
+
+TODO: stats, bulk delete, update api description

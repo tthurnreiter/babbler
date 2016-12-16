@@ -190,3 +190,26 @@ exports.deleteFollowing = {
     });
   },
 };
+
+exports.bulkDelete = {
+  auth: false,
+  handler: function (request, reply) {
+    var userIDs = request.payload;
+
+    if(!userIDs || !userIDs[0]) {
+      reply(Boom.badData('data not valid'));
+      return;
+    }
+
+
+    var succeeded = [];
+    var failed = [];
+
+    //TODO remove Babbles first
+    User.remove({ _id: {$in: userIDs }}).then((err, obj) => {
+      reply( { "numDeleted" : err.result.n } );
+    }).catch( err => {
+      reply(Boom.badData('error'));
+    });
+  },
+};
