@@ -1,6 +1,7 @@
 'use strict';
 
 const User = require('../models/user');
+const Babble = require('../models/babble');
 const Boom = require('boom');
 const Joi = require('joi');
 const _ = require('lodash');
@@ -114,8 +115,10 @@ exports.getAll = {
 exports.deleteOne = {
   auth: false,
   handler: function (request, reply) {
-    User.remove({ _id: request.params.id }).then(() => {
-      reply().code(204);
+    Babble.remove({ user: request.params.id }).then(() => {
+      User.remove({ _id: request.params.id }).then(() => {
+        reply().code(204);
+      });
     }).catch(err => {
       reply(Boom.notFound('id not found'));
     });
@@ -125,8 +128,10 @@ exports.deleteOne = {
 exports.deleteAll = {
   auth: false,
   handler: function (request, reply) {
-    User.remove({}).then(() => {
-      reply().code(204);
+    Babble.remove({}).then(() => {
+      User.remove({}).then(() => {
+        reply().code(204);
+      });
     }).catch(err => {
       reply(Boom.badImplementation('error while deleting'));
     });
@@ -147,8 +152,7 @@ exports.getFollowing = {
 exports.addFollowing = {
   auth: false,
   handler: function (request, reply) {
-    if(request.params.id1 === request.params.id2)
-    {
+    if (request.params.id1 === request.params.id2) {
       reply(Boom.badRequest('users not follow theirselves'));
       return;
     }
@@ -156,7 +160,7 @@ exports.addFollowing = {
       User.findOne({ _id: request.params.id1 }),
       User.findOne({ _id: request.params.id2 }),
     ]).then(([user1, user2]) => {
-      if(_.some(user1.following, user2._id)){
+      if (_.some(user1.following, user2._id)) {
         reply(user1.following).code(200);
         return;
       }
