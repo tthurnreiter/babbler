@@ -25,6 +25,10 @@ body{
     margin: 0 !important;
 }
 
+.delete.babble{
+    z-index: 99;
+}
+
 #bg-container{
     position:absolute;
     top:0;
