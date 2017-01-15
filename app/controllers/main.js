@@ -73,7 +73,6 @@ exports.showUsers = {
       User.findOne({ email: request.auth.credentials.loggedInUser }),
     ]).then(([users, loggedInUser]) => {
           users.forEach(user => {
-            user.numBabbles = user.
             user.showFollow = user.showUnfollow = false;
             if (_.some(loggedInUser.following, user._id)) {
               user.showUnfollow = true;
@@ -82,6 +81,7 @@ exports.showUsers = {
               user.showFollow = true;
             }
             if (loggedInUser.role === 'admin') {
+              loggedInUser.canBulkDelete = true;
               user.canDelete = true;
             }
           });

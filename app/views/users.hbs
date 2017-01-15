@@ -3,11 +3,21 @@
 <script src="/js/bulkdelete.js"></script>
 <div class="identity" id="{{loggedInUser._id}}" style="display:none;"></div>
 {{> deletemodal item="user"}}
-<div class="ui container">
-    {{> bulkdeletebutton}}
-    <div class="ui centered cards">
-        {{#each users}}
-            {{> usercard}}
-        {{/each}}
+<div class="ui grid">
+    {{#if loggedInUser.canBulkDelete}}
+        <div class="ui row">
+            <div class="ui container">
+                {{> bulkdeletebutton}}
+            </div>
+        </div>
+    {{/if}}
+    <div class="ui row">
+        <div class="ui container">
+            <div class="ui centered cards">
+                {{#each users}}
+                    {{> usercard}}
+                {{/each}}
+            </div>
+        </div>
     </div>
 </div>
