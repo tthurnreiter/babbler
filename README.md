@@ -4,7 +4,7 @@ Assignment for DMAS course in WS16
 
 http://babbler1.herokuapp.com
 
-https://github.com/einstweilenhier/babbler
+https://github.com/tthurnreiter/babbler
 
 API Description:
 
